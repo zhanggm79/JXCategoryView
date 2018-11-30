@@ -38,7 +38,7 @@
 
 - (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent {
 
-    CGFloat targetX = leftCellFrame.origin.x + (leftCellFrame.size.width - self.dotSize.width)/2;
+    CGFloat targetX = 0;
     CGFloat targetWidth = self.dotSize.width;
 
     if (percent == 0) {
@@ -70,7 +70,7 @@
     }
 }
 
-- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition {
+- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition isClicked:(BOOL)isClicked {
     CGFloat x = cellFrame.origin.x + (cellFrame.size.width - self.dotSize.width)/2;
     CGFloat y = self.superview.bounds.size.height - self.dotSize.height - self.verticalMargin;
     if (self.componentPosition == JXCategoryComponentPosition_Top) {

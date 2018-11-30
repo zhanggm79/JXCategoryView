@@ -46,6 +46,7 @@
     self.scrollView.bounces = NO;
     [self.view addSubview:self.scrollView];
 
+    self.automaticallyAdjustsScrollViewInsets = NO;
     if (@available(iOS 11.0, *)) {
         self.scrollView.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
     }
@@ -134,7 +135,10 @@
     if (_shouldHandleScreenEdgeGesture) {
         self.navigationController.interactivePopGestureRecognizer.enabled = (index == 0);
     }
+}
 
+- (void)categoryView:(JXCategoryBaseView *)categoryView didScrollSelectedItemAtIndex:(NSInteger)index {
+    
 }
 
 @end

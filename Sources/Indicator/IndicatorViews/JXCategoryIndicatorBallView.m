@@ -60,7 +60,7 @@
 
 - (void)jx_contentScrollViewDidScrollWithLeftCellFrame:(CGRect)leftCellFrame rightCellFrame:(CGRect)rightCellFrame selectedPosition:(JXCategoryCellClickedPosition)selectedPosition percent:(CGFloat)percent {
 
-    CGFloat targetXOfBigBall = leftCellFrame.origin.x + (leftCellFrame.size.width - self.ballViewSize.width)/2;
+    CGFloat targetXOfBigBall = 0;
     CGFloat targetXOfSmallBall = leftCellFrame.origin.x + (leftCellFrame.size.width - self.ballViewSize.width)/2;
     CGFloat targetWidthOfSmallBall = self.ballViewSize.width;
 
@@ -103,7 +103,7 @@
     }
 }
 
-- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition {
+- (void)jx_selectedCell:(CGRect)cellFrame clickedRelativePosition:(JXCategoryCellClickedPosition)clickedRelativePosition isClicked:(BOOL)isClicked {
 
     CGFloat x = cellFrame.origin.x + (cellFrame.size.width - self.ballViewSize.width)/2;
     CGFloat y = self.superview.bounds.size.height - self.ballViewSize.height - self.verticalMargin;
