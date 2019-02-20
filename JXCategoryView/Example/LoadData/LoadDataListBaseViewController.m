@@ -7,7 +7,7 @@
 //
 
 #import "LoadDataListBaseViewController.h"
-
+#import "DetailViewController.h"
 
 @interface LoadDataListBaseViewController ()
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -30,12 +30,6 @@
     self.refreshControl = refreshControl;
 
     [self.tableView reloadData];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-
-    [self loadDataForFirst];
 }
 
 - (void)headerRefresh {
@@ -74,6 +68,11 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.textLabel.text = self.dataSource[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    DetailViewController *vc = [[DetailViewController alloc] init];
+    [self.naviController pushViewController:vc animated:true];
 }
 
 @end

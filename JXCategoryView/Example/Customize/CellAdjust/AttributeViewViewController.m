@@ -40,6 +40,11 @@
     [sunday addAttribute:NSForegroundColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, 2)];
 
     _attributeTitles = @[monday, tuesday, wednesday, thursday, friday, saturday, sunday];
+    NSMutableArray *titles = [NSMutableArray array];
+    for (NSMutableAttributedString *attriString in self.attributeTitles) {
+        [titles addObject:attriString.string];
+    }
+    self.titles = titles;
 
     [super viewDidLoad];
 
@@ -55,12 +60,8 @@
     return (JXCategoryTitleAttributeView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.attributeTitles.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryTitleAttributeView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryTitleAttributeView alloc] init];
 }
 
 @end

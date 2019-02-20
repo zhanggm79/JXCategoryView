@@ -17,6 +17,7 @@
 @implementation ImageViewController
 
 - (void)viewDidLoad {
+    self.titles = @[@"crab", @"lobster", @"apple", @"carrot", @"grape", @"watermelon"];
     _imageNames = @[@"crab", @"lobster", @"apple", @"carrot", @"grape", @"watermelon"];
 
     [super viewDidLoad];
@@ -26,6 +27,7 @@
     self.myCategoryView.imageNames = self.imageNames;
     self.myCategoryView.selectedImageNames = selectedImageNames;
     self.myCategoryView.imageZoomEnabled = YES;
+    self.myCategoryView.imageCornerRadius = 0;
 
     JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     lineView.indicatorLineWidth = 20;
@@ -36,12 +38,8 @@
     return (JXCategoryImageView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.imageNames.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryImageView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryImageView alloc] init];
 }
 
 @end

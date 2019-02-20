@@ -10,19 +10,17 @@
 #import "JXCategoryTitleView.h"
 
 @interface SegmentedControlViewController ()
-@property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @end
 
 @implementation SegmentedControlViewController
 
 - (void)viewDidLoad {
-    _titles = @[@"螃蟹", @"苹果", @"胡萝卜", @"葡萄", ];
+    self.titles = @[@"螃蟹", @"苹果", @"胡萝卜", @"葡萄", ];
 
     [super viewDidLoad];
 
-    CGFloat totalItemWidth = WindowsSize.width - 30*2;
-    self.categoryView.frame = CGRectMake(30, 10, totalItemWidth, 30);
+    CGFloat totalItemWidth = self.view.bounds.size.width - 30*2;
     self.myCategoryView.layer.cornerRadius = 15;
     self.myCategoryView.layer.masksToBounds = YES;
     self.myCategoryView.layer.borderColor = [UIColor redColor].CGColor;
@@ -41,16 +39,19 @@
     self.myCategoryView.indicators = @[backgroundView];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    CGFloat totalItemWidth = self.view.bounds.size.width - 30*2;
+    self.myCategoryView.frame = CGRectMake(30, 10, totalItemWidth, 30);
+}
+
 - (JXCategoryTitleView *)myCategoryView {
     return (JXCategoryTitleView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.titles.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryTitleView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryTitleView alloc] init];
 }
 
 - (CGFloat)preferredCategoryViewHeight {

@@ -11,7 +11,6 @@
 #import "TitleImageSettingViewController.h"
 
 @interface TitleImageViewController () <JXCategoryViewDelegate, TitleTitleImageSettingViewControllerDelegate>
-@property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleImageView *myCategoryView;
 @property (nonatomic, assign) JXCategoryTitleImageType currentType;
 @end
@@ -19,7 +18,7 @@
 @implementation TitleImageViewController
 
 - (void)viewDidLoad {
-    _titles = @[@"螃蟹", @"小龙虾", @"苹果", @"胡萝卜", @"葡萄", @"西瓜"];
+    self.titles = @[@"螃蟹", @"小龙虾", @"苹果", @"胡萝卜", @"葡萄", @"西瓜"];
 
     [super viewDidLoad];
 
@@ -36,23 +35,19 @@
     self.myCategoryView.imageZoomScale = 1.3;
     self.myCategoryView.averageCellSpacingEnabled = NO;
 
-    [self configCategoryViewWithType:JXCategoryTitleImageType_LeftImage];
-
     JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     lineView.indicatorLineWidth = 20;
     self.myCategoryView.indicators = @[lineView];
+
+    [self configCategoryViewWithType:JXCategoryTitleImageType_LeftImage];
 }
 
 - (JXCategoryTitleImageView *)myCategoryView {
     return (JXCategoryTitleImageView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.titles.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryTitleImageView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryTitleImageView alloc] init];
 }
 
 - (CGFloat)preferredCategoryViewHeight {

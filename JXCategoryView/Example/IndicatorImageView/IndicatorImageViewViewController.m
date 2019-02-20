@@ -10,7 +10,6 @@
 #import "JXCategoryTitleView.h"
 
 @interface IndicatorImageViewViewController () <JXCategoryViewDelegate>
-@property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) JXCategoryTitleView *myCategoryView;
 @property (nonatomic, strong) UIImageView *bgSelectedImageView;
 @property (nonatomic, strong) UIImageView *bgUnselectedImageView;
@@ -19,7 +18,7 @@
 @implementation IndicatorImageViewViewController
 
 - (void)viewDidLoad {
-    _titles = @[@"荷花", @"河流", @"海洋", @"城市", ];
+    self.titles = @[@"荷花", @"河流", @"海洋", @"城市", ];
     self.isNeedIndicatorPositionChangeItem = YES;
 
     [super viewDidLoad];
@@ -50,16 +49,18 @@
     [self.view sendSubviewToBack:self.bgUnselectedImageView];
 }
 
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
+
+    self.categoryView.frame = CGRectMake(30, 20, WindowsSize.width - 30*2, 60);
+}
+
 - (JXCategoryTitleView *)myCategoryView {
     return (JXCategoryTitleView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.titles.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryTitleView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryTitleView alloc] init];
 }
 
 - (CGFloat)preferredCategoryViewHeight {

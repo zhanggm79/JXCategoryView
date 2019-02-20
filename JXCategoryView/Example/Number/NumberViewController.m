@@ -10,7 +10,6 @@
 #import "JXCategoryNumberView.h"
 
 @interface NumberViewController () <JXCategoryViewDelegate>
-@property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, strong) NSArray *numbers;
 @property (nonatomic, strong) JXCategoryNumberView *myCategoryView;
 @end
@@ -18,7 +17,7 @@
 @implementation NumberViewController
 
 - (void)viewDidLoad {
-    _titles = @[@"螃蟹", @"麻辣小龙虾", @"苹果", @"营养胡萝卜", @"葡萄", @"美味西瓜", @"香蕉", @"香甜菠萝", @"鸡肉", @"鱼", @"海星"];
+    self.titles = @[@"螃蟹", @"麻辣小龙虾", @"苹果", @"营养胡萝卜", @"葡萄", @"美味西瓜", @"香蕉", @"香甜菠萝", @"鸡肉", @"鱼", @"海星"];
 
     [super viewDidLoad];
 
@@ -29,6 +28,12 @@
 
     self.myCategoryView.titles = self.titles;
     self.myCategoryView.counts = self.numbers;
+    self.myCategoryView.numberStringFormatterBlock = ^NSString *(NSInteger number) {
+        if (number > 999) {
+            return @"999+";
+        }
+        return [NSString stringWithFormat:@"%ld", (long)number];
+    };
 
     JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
     self.myCategoryView.indicators = @[lineView];
@@ -38,12 +43,8 @@
     return (JXCategoryNumberView *)self.categoryView;
 }
 
-- (NSUInteger)preferredListViewCount {
-    return self.titles.count;
-}
-
-- (Class)preferredCategoryViewClass {
-    return [JXCategoryNumberView class];
+- (JXCategoryBaseView *)preferredCategoryView {
+    return [[JXCategoryNumberView alloc] init];
 }
 
 - (void)reloadNumbers {

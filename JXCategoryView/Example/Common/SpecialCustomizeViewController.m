@@ -12,7 +12,8 @@
 #import "NestViewController.h"
 #import "VerticalListViewController.h"
 #import "PagingViewController.h"
-#import "LoadDataViewController.h"
+#import "LoadDataListCustomViewController.h"
+#import "LoadDataListContainerViewController.h"
 
 @interface SpecialCustomizeViewController ()
 
@@ -23,7 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.translucent = NO;
     self.tableView.rowHeight = 44;
 }
 
@@ -36,67 +36,34 @@
         }
     }
 
-    switch (indexPath.row) {
-        case 0:
-        {
-            //个人主页
-            PagingViewController *pagingVC = [[PagingViewController alloc] init];
-            pagingVC.title = title;
-            [self.navigationController pushViewController:pagingVC animated:YES];
-        }
-            break;
-        case 1:
-        {
-            //segmentedControl
-            SegmentedControlViewController *segmentedVC = [[SegmentedControlViewController alloc] init];
-            segmentedVC.title = title;
-            [self.navigationController pushViewController:segmentedVC animated:YES];
-        }
-            break;
-        case 2:
-        {
-            //导航栏
-            NaviSegmentedControlViewController *segmentedVC = [[NaviSegmentedControlViewController alloc] init];
-            segmentedVC.title = title;
-            [self.navigationController pushViewController:segmentedVC animated:YES];
-        }
-            break;
-        case 3:
-        {
-            //嵌套使用
-            NestViewController *vc = [[NestViewController alloc] init];
-            vc.title = title;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 4:
-        {
-            //垂直列表滚动
-            VerticalListViewController *vc = [[VerticalListViewController alloc] init];
-            vc.title = title;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 5:
-        {
-            //数据源刷新&列表数据加载
-            LoadDataViewController *vc = [[LoadDataViewController alloc] init];
-            vc.title = title;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-        case 6:
-        {
-            //数据源刷新&列表加载数据（ListVCContainerView封装）
-            LoadDataViewController *vc = [[LoadDataViewController alloc] init];
-            vc.isNeedCategoryListContainerView = YES;
-            vc.title = title;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
-            break;
-
-        default:
-            break;
+    if ([title isEqualToString:@"个人主页"]) {
+        PagingViewController *pagingVC = [[PagingViewController alloc] init];
+        pagingVC.title = title;
+        [self.navigationController pushViewController:pagingVC animated:YES];
+    }else if ([title isEqualToString:@"SegmentedControl效果"]) {
+        SegmentedControlViewController *segmentedVC = [[SegmentedControlViewController alloc] init];
+        segmentedVC.title = title;
+        [self.navigationController pushViewController:segmentedVC animated:YES];
+    }else if ([title isEqualToString:@"导航栏使用"]) {
+        NaviSegmentedControlViewController *segmentedVC = [[NaviSegmentedControlViewController alloc] init];
+        segmentedVC.title = title;
+        [self.navigationController pushViewController:segmentedVC animated:YES];
+    }else if ([title isEqualToString:@"嵌套使用"]) {
+        NestViewController *vc = [[NestViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if ([title isEqualToString:@"垂直列表滚动"]) {
+        VerticalListViewController *vc = [[VerticalListViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if ([title isEqualToString:@"刷新数据+ListContainerView"]) {
+        LoadDataListContainerViewController *vc = [[LoadDataListContainerViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else if ([title isEqualToString:@"刷新数据+列表自定义"]) {
+        LoadDataListCustomViewController *vc = [[LoadDataListCustomViewController alloc] init];
+        vc.title = title;
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
