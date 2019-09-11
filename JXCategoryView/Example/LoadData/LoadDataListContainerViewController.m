@@ -7,14 +7,11 @@
 //
 
 #import "LoadDataListContainerViewController.h"
-#import "JXCategoryView.h"
 #import "JXCategoryListContainerView.h"
 #import "LoadDataListContainerListViewController.h"
 
-@interface LoadDataListContainerViewController () <JXCategoryViewDelegate, JXCategoryListContainerViewDelegate>
-@property (nonatomic, strong) JXCategoryTitleView *categoryView;
-@property (nonatomic, strong) JXCategoryListContainerView *listContainerView;
-@property (nonatomic, strong) NSArray <NSString *> *titles;
+@interface LoadDataListContainerViewController () <JXCategoryViewDelegate>
+
 @end
 
 @implementation LoadDataListContainerViewController
@@ -38,15 +35,18 @@
     [self.view addSubview:self.listContainerView];
 
     self.categoryView.contentScrollView = self.listContainerView.scrollView;
+}
 
-    [self reloadData];
+//!!!!!!!!!!!!!!!!!!!如果你的列表是UIViewController，且你的列表依赖ViewWillAppear等生命周期方法，请添加下面的方法。避免生命周期方法重复调用!!!!!!!!!!!!!!!!!!!!!!!!
+- (BOOL)shouldAutomaticallyForwardAppearanceMethods {
+    return NO;
 }
 
 - (void)viewDidLayoutSubviews {
     [super viewDidLayoutSubviews];
 
     self.categoryView.frame = CGRectMake(0, 0, self.view.bounds.size.width, 50);
-    self.listContainerView.frame = CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height);
+    self.listContainerView.frame = CGRectMake(0, 50, self.view.bounds.size.width, self.view.bounds.size.height - 50);
 }
 
 /**
@@ -79,6 +79,9 @@
 - (id<JXCategoryListContentViewDelegate>)listContainerView:(JXCategoryListContainerView *)listContainerView initListForIndex:(NSInteger)index {
     LoadDataListContainerListViewController *listVC = [[LoadDataListContainerListViewController alloc] init];
     listVC.naviController = self.navigationController;
+    //如果列表是UIViewController包裹的，需要添加addChildViewController代码，这样子在iPhoneX系列手机就不会有底部安全距离错误的问题！！！
+    [self addChildViewController:listVC];
+    listVC.title = self.titles[index];
     return listVC;
 }
 

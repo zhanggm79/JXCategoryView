@@ -55,6 +55,47 @@
         titleCategoryView.titleLabelZoomScale = 1.3;
         [self.navigationController pushViewController:testVC animated:YES];
 
+    }else if ([title isEqualToString:@"大小缩放+底部锚点"]) {
+
+        TitleViewController *testVC = [[TitleViewController alloc] init];
+        testVC.title = title;
+        JXCategoryTitleView *titleCategoryView = (JXCategoryTitleView *)testVC.categoryView;
+        titleCategoryView.titleColorGradientEnabled = YES;
+        titleCategoryView.titleLabelZoomEnabled = YES;
+        titleCategoryView.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleBottom;
+//        titleCategoryView.titleLabelVerticalOffset = 5;
+        [self.navigationController pushViewController:testVC animated:YES];
+
+    }else if ([title isEqualToString:@"大小缩放+底部锚点+视觉对齐"]) {
+
+        TitleViewController *testVC = [[TitleViewController alloc] init];
+        testVC.title = title;
+        JXCategoryTitleView *titleCategoryView = (JXCategoryTitleView *)testVC.categoryView;
+        titleCategoryView.titleColorGradientEnabled = YES;
+        titleCategoryView.titleLabelZoomEnabled = YES;
+        titleCategoryView.titleLabelZoomScale = 1.85;
+        titleCategoryView.cellWidthZoomEnabled = YES;
+        titleCategoryView.cellWidthZoomScale = 1.85;
+        titleCategoryView.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleBottom;
+        titleCategoryView.selectedAnimationEnabled = YES;
+        titleCategoryView.titleLabelZoomSelectedVerticalOffset = 3;
+        //        titleCategoryView.titleLabelVerticalOffset = 5;
+        [self.navigationController pushViewController:testVC animated:YES];
+
+    }else if ([title isEqualToString:@"大小缩放+顶部锚点"]) {
+
+        TitleViewController *testVC = [[TitleViewController alloc] init];
+        testVC.title = title;
+        JXCategoryTitleView *titleCategoryView = (JXCategoryTitleView *)testVC.categoryView;
+
+        titleCategoryView.titleColorGradientEnabled = YES;
+        titleCategoryView.titleLabelZoomEnabled = YES;
+        titleCategoryView.titleLabelZoomScale = 1.3;
+        titleCategoryView.titleLabelAnchorPointStyle = JXCategoryTitleLabelAnchorPointStyleTop;
+//        titleCategoryView.titleLabelVerticalOffset = 5;
+
+        [self.navigationController pushViewController:testVC animated:YES];
+
     }else if ([title isEqualToString:@"大小缩放+字体粗细"]) {
 
         TitleViewController *testVC = [[TitleViewController alloc] init];
@@ -90,6 +131,11 @@
         titleCategoryView.selectedAnimationEnabled = YES;
         titleCategoryView.cellWidthZoomEnabled = YES;
         titleCategoryView.cellWidthZoomScale = 1.3;
+
+        JXCategoryIndicatorLineView *lineView = [[JXCategoryIndicatorLineView alloc] init];
+        lineView.indicatorWidth = 20;
+        titleCategoryView.indicators = @[lineView];
+
         [self.navigationController pushViewController:testVC animated:YES];
 
     }else if ([title isEqualToString:@"Cell图片样式"]) {
@@ -118,6 +164,17 @@
         TitleImageViewController *imageVC = [[TitleImageViewController alloc] init];
         imageVC.title = title;
         [self.navigationController pushViewController:imageVC animated:YES];
+
+    }else if ([title isEqualToString:@"多行文本"]) {
+
+        TitleViewController *testVC = [[TitleViewController alloc] init];
+        testVC.title = title;
+        JXCategoryTitleView *titleCategoryView = (JXCategoryTitleView *)testVC.categoryView;
+        titleCategoryView.titleColorGradientEnabled = YES;
+        //暂不支持自动换行，需要自行插入换行符\n
+        titleCategoryView.titleNumberOfLines = 2;
+        testVC.titles = @[@"螃蟹\ncrab", @"麻辣小龙虾\nlobster", @"苹果\napple", @"营养胡萝卜\ncarrot", @"葡萄\ngrape", @"美味西瓜\nwatermelon", @"香蕉\nbanana", @"香甜菠萝\npineapple", @"鸡肉\nchicken", @"鱼\nfish", @"海星\nstarfish"];
+        [self.navigationController pushViewController:testVC animated:YES];
 
     }else if ([title isEqualToString:@"多行富文本"]) {
 
